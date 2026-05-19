@@ -11,8 +11,8 @@ const authmiddleware = require("./middlewares/authmiddleware")
 
 app.use(express.json())
 app.use(express.urlencoded())
-app.use("/api/game",gameRouter)
 app.use("/api/auth",authRouter)
+app.use("/api/game",authmiddleware,gameRouter)
 app.use("/api/leaderboard",authmiddleware,leaderboardRouter)
 
 console.log(process.env.DATABASE_URL)

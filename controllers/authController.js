@@ -1,4 +1,4 @@
-let service = require("../services/authServices");
+let service = require("../services/authService");
 let jwt = require("jsonwebtoken");
 let { createError } = require("../middlewares/errorHandler");
 

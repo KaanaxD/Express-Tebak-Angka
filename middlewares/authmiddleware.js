@@ -10,6 +10,7 @@ function authmiddleware(req,res,next){
     if(!check){
         return next(createError(404,"invalid token"))
     } else {
+        req.user = check
         next()
     }
 }
