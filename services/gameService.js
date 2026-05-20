@@ -6,7 +6,6 @@ async function setNewGame(user_id, rng) {
 
 async function historyCheck(id) {
   let done = await query.getLatestGameQuery(id);
-  console.log(done);
   if (done.length == 0) {
     return true;
   } else if (done[0].is_finished == true) {
@@ -30,7 +29,6 @@ async function guessCheck(id, guess) {
     } else {
       status = "kebesaran";
     }
-    console.log(target[0]);
    let result = await query.setGameQuery(
       id,
       target[0].target_number,

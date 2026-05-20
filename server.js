@@ -13,9 +13,8 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use("/api/auth",authRouter)
 app.use("/api/game",authmiddleware,gameRouter)
-app.use("/api/leaderboard",authmiddleware,leaderboardRouter)
+app.use("/api/leaderboard",leaderboardRouter)
 
-console.log(process.env.DATABASE_URL)
 
 app.use(errorHandler.errorHandler)
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`listening on port ${port}!`))

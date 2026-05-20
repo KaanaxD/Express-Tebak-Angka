@@ -1,6 +1,11 @@
-let service = require("../services/gameService");
-let { createError } = require("../middlewares/errorHandler");
-let { rng } = require("../utils/rng");
+const service = require("../services/gameService");
+const { createError } = require("../middlewares/errorHandler");
+const { rng } = require("../utils/rng");
+const { z } = require("zod");
+
+const input = z.object({
+  guess: z.number(),
+});
 
 async function startNewGame(req, res, next) {
   let target = rng();
@@ -20,13 +25,18 @@ async function startNewGame(req, res, next) {
 async function checkGame(req, res, next) {
   try {
     let guess = req.body.guess;
-    if(!guess){
-        throw createError(400,"Guess tidak boleh kosong")
+    if (!guess) {
+      throw createError(400, "Guess tidak boleh kosong");
+    }
+    let inputCheck = input.safeParse({guess});
+  
+    if (!inputCheck.success) {
+      throw createError(400,"guess harus berupa angka")
     }
     let result = await service.guessCheck(req.user.id, guess);
-    res.json(result)
+    res.json(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
 module.exports = { startNewGame, checkGame };
