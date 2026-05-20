@@ -5,9 +5,9 @@ let { createError } = require("../middlewares/errorHandler");
 const { verify } = require("jsonwebtoken");
 
 async function makeAccount(nama, password) {
-  let hashPassword = await bcrypt.hash(password, 10);
+  let hashPasswrd = await bcrypt.hash(password, 10);
   try {
-    await query.registerQuery(nama, hashPassword);
+    await query.registerQuery(nama, hashPasswrd);
   } catch (error) {
     throw createError(400,"Username telah terdaftar")
   }

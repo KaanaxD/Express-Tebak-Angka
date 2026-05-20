@@ -6,4 +6,4 @@ let pool = new db.Pool({
   },
 });
 
-module.exports = pool
+module.exports = pool;
